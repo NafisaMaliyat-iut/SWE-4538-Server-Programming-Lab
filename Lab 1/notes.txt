@@ -61,3 +61,13 @@ We can change normal kind of execution.
 when req is sent and no response comes, the variable is empty. The promise is stored as placeholder. When
 resolved, the image is stored instead.
 The promise does not ensure resources ashbeiii but it promises response (error or the requested resources)
+
+
+
+Difference between package.json and package-lock.json
+===========================================================
+package-lock.json has the package versions to avoid discrepency in versions
+
+arrow function
+================
+short cut way of writing functions
