@@ -1,0 +1,63 @@
+client side processing
+============================================
+You can see some responsive application example: hover effect, popup
+All this needs processing which is done by server side
+
+Form: 
+============================================
+Name : -----
+City/District: ----- (dropdown)
+PS: ----- (dropdown) --> depends on selected city
+
+So this web app has all the ps binded with the city. could have showed all ps but difficult for the user
+and creates user data inconsistency
+To do this, maybe it has a tuple where ps is binded with a city. soo search through the db and filters data
+This searching requires processing power
+Page was not refreshed tho.. so this computation was completed using client side processing and not server side
+If it refreshes, it contacts with the server and it requires server side processing
+
+In web apps, if you can do it in client side its better
+Server load is reduced since it has to handle requests and responses
+Additionally it gives user a better user experience. Loading time makes it more boring.
+How is no loading possible? Maybe it has a database or not but has no server. Maybe it contacts the database 
+and all processing is done in client side
+Known as BaAs -->Backend as a service
+
+Server Side 
+======================================
+Many languages can be used for server side computation: php, js
+On top of that, backend framework is used for example, express which is a module for a library 
+Library makes it efficient because it has a lot of pre built code
+Laravel makes it possible to do all the authorization and authentication in one line???
+Backend code imposes restrictions, such as it creates some folder structure for you. Not express tho but jango,
+and it restricts that all db stuff in one folder, views in another folder... etc
+This makes your code modular for example, you can reuse some UI another person made
+
+Security:
+Express offers you protection against different types of attack. So you are safe against some of the network
+attacks
+
+Scalability:
+Based on the number of requests per second, you can expand or reduce size of your application and not just 
+EXTEND
+
+Consistency:
+If you have different file/folder structure, it will reduce readability. You want to locate code for user
+search logic. Very difficult to find the code if you dont use a format. If you use framework, your web app
+will have a certain folder structure and coding style will also be consistent.
+
+1.3 - 1.5 complete reading on your own
+basic info regarding node and express
+
+
+Asynchronous
+===========================
+If we depend on synchronous requests... our web app will be slower. Because it might depend on external 
+apis which is slower. 
+We send a request for the image to another server but next statement will not be executed until this response
+comes. So we give an immediate response (promise) to the server which then executes next things
+Promise resolved when image is sent. instead of promise the image is stored.
+We can change normal kind of execution.
+when req is sent and no response comes, the variable is empty. The promise is stored as placeholder. When
+resolved, the image is stored instead.
+The promise does not ensure resources ashbeiii but it promises response (error or the requested resources)
