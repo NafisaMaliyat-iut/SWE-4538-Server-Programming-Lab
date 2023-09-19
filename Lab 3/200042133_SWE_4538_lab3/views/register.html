@@ -22,15 +22,16 @@
         required
       /><br /><br />
 
-      <input type="submit" value="Register" />
-
       <div id="error_message"></div>
+
+      <input type="submit" value="Register" />
     </form>
 
     <script>
       function validatePassword() {
-        const password = document.getElementById("password");
-        const error_message = document.getElementById("error_mesage");
+        const password = document.getElementById("password").value;
+        console.log(password)
+        const error_message = document.getElementById("error_message");
         const passwordRegex =
           /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[^a-zA-Z0-9]).{8,}$/;
         if (!passwordRegex.test(password)) {
