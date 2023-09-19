@@ -34,24 +34,31 @@ const getRegister = async (req, res) => {
 
 const postRegister = async (req, res, next) => {
   try {
-    const hashedPassword = await bcrypt.hash(req.body.password, 10); // req.body.password ==> password should be exact match to register.html name=password,  10:how many time you want to generate hash. it's a standard default value
-    const users = readFile(usersFilePath);
-    users.push({
-      id: Date.now().toString(),
-      name: req.body.username,
-      email: req.body.email,
-      password: hashedPassword,
-    });
+    const password = req.body.password;
+    const passwordRegex =
+      /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[^a-zA-Z0-9]).{8,}$/;
+    if (!passwordRegex.test(password)) {
+      // Password format is invalid
+      res.send("invalid");
+    } else {
+      const hashedPassword = await bcrypt.hash(req.body.password, 10); // req.body.password ==> password should be exact match to register.html name=password,  10:how many time you want to generate hash. it's a standard default value
+      const users = readFile(usersFilePath);
+      users.push({
+        id: Date.now().toString(),
+        name: req.body.username,
+        email: req.body.email,
+        password: hashedPassword,
+      });
 
-    writeFile(usersFilePath, users);
+      writeFile(usersFilePath, users);
 
-    res.redirect("/login");
+      res.redirect("/login");
+    }
   } catch {
     res.redirect("/register");
   }
   // console.log(users); // show the user list
 };
-
 
 module.exports = {
   getLogin,

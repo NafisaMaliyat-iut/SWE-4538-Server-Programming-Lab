@@ -7,7 +7,7 @@
   </head>
   <body>
     <h1>Registration</h1>
-    <form action="/register" method="POST">
+    <form action="/register" method="POST" onsubmit="return validatePassword()">
       <label for="username">Username:</label>
       <input type="text" id="username" name="username" required /><br /><br />
 
@@ -38,8 +38,9 @@
           error_message.innerHTML = "Password too weak!";
           error_message.style.color = "red";
           return false;
-        } else {
-          return true;
+        }
+        else {
+            return true;
         }
       }
     </script>
