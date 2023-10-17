@@ -1,0 +1,18 @@
+go to mongodb atlas
+sign in
+on top left, click on project name type er jinish and add new project
+add a name and click add project
+create deployment
+add stuff and click create. creating cluster dekhabe
+username nafisamaliyat
+password KiIxslx3QpEuwXxo (SAVE THIS PASS!!!!)
+ip address 0.0.0.0/0 add
+tips: sidebar e database access and network access tabs e dekha jay
+data services --> connect to cluster --> driver --> get the url
+url added to env but eikhane <password> (purata) baad diye password add korba
+
+
+new stuff
+users.find().select() --> selective attributes pathano possible
+req.user --> session based auth theke from passport
+patch othoba or put diye already existing data update kori
