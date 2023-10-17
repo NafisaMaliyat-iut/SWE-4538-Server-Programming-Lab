@@ -16,3 +16,8 @@ new stuff
 users.find().select() --> selective attributes pathano possible
 req.user --> session based auth theke from passport
 patch othoba or put diye already existing data update kori
+
+
+
+tasks: 
+add a hobby model/project model and add crud operations for that
