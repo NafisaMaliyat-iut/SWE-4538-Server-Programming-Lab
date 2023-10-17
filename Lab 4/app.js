@@ -35,6 +35,8 @@ app.use(cors({
 
 const routes = require("./routes/auth.routes");
 app.use(routes);
+const projectRoutes = require("./routes/project.routes");
+app.use(projectRoutes);
 
 const ensureAuthenticated = require("./middlewares/auth.middleware");
 app.get("/welcome", ensureAuthenticated, (req, res) => {
