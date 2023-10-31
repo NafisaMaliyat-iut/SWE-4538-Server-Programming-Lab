@@ -151,7 +151,7 @@ const addProjectImage = async (req, res) => {
       name: name,
     });
 
-    console.log("project found!");
+    console.log(project);
 
     const validated = validateRequest(
       project,
@@ -192,10 +192,13 @@ const addProjectAlbum = async (req, res) => {
       (file) => file.filename
     );
 
+    console.log("photo: " + photo);
+
     const name = req.params.name;
     const project = await Project.findOne({
       name: name,
     });
+    console.log(project);
 
     const validated = validateRequest(
       project,
@@ -205,9 +208,10 @@ const addProjectAlbum = async (req, res) => {
 
     if (validated) {
       if (photo) {
-        let album = project.images || [];
+        console.log("photo: " + photo);
+        let album = project.project_album || [];
         album.push(...photo);
-        project.images = album;
+        project.project_album = album;
       }
       await project.save();
 
@@ -242,6 +246,7 @@ const addProjectAudios = async (req, res) => {
     const project = await Project.findOne({
       name: name,
     });
+    console.log(project);
 
     const validated = validateRequest(
       project,
@@ -251,9 +256,14 @@ const addProjectAudios = async (req, res) => {
 
     if (validated) {
       if (audio) {
-        let audios = project.project_audios || [];
-        audios.push(...audios);
+        console.log(project.project_audios);
+        let audios = project.project_audios
+          ? project.project_audios
+          : [];
+        audios.push(...audio);
         project.project_audios = audios;
+
+        console.log(audios);
       }
       await project.save();
 
