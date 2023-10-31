@@ -65,6 +65,30 @@ const getProjectInfos = async (req, res) => {
   }
 };
 
+const getMyProjects = async (req, res) => {
+  try {
+    const userId = req?.user?.id;
+    if(userId){
+      const projects = await Project.find({
+        user_id:userId
+      }).select(
+        "-user_id"
+      );
+      res.json(projects);
+    }
+    else{
+      res.json({
+        message: "No user signed in!",
+      });
+    }
+    
+  } catch (error) {
+    res
+      .status(500)
+      .json({ error: error.message });
+  }
+};
+
 const updateProject = async (req, res) => {
   try {
     const { category, status } = req.body;
@@ -285,6 +309,7 @@ const addProjectAudios = async (req, res) => {
 module.exports = {
   addProject,
   getProjectInfos,
+  getMyProjects,
   updateProject,
   deleteProject,
   addProjectImage,
