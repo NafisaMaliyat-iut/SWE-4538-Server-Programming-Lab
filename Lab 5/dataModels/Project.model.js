@@ -14,11 +14,27 @@ const ProjectSchema = new mongoose.Schema({
     type: String,
     required: true,
   },
-  status:{
+  status: {
     type: String,
-    default: 'Pending',
-  }
+    default: "Pending",
+  },
+
+  project_image: {
+    type: String,
+    default: "",
+  },
+  project_album: {
+    type: [String],
+    default: [],
+  },
+  project_audios: {
+    type: [String],
+    default: [],
+  },
 });
 
-const Project = mongoose.model("Project", ProjectSchema);
+const Project = mongoose.model(
+  "Project",
+  ProjectSchema
+);
 module.exports = Project;

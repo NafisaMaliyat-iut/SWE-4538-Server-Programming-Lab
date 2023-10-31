@@ -20,6 +20,9 @@ app.use(
 app.use(passport.initialize());
 app.use(passport.session());
 
+// To store image/files
+app.use(express.static('./uploads'))
+
 //Body Parser
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
