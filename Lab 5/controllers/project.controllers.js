@@ -124,6 +124,18 @@ const deleteProject = async (req, res) => {
   }
 };
 
+const validateRequest = (project, req) => {
+  const userLoggedIn = req?.user?.id || null;
+  console.log(userLoggedIn);
+  if (
+    userLoggedIn !== null &&
+    project.user_id === req.user.id
+  ) {
+    return true;
+  }
+  return false;
+};
+
 const addProjectImage = async (req, res) => {
   try {
     if (!req.file) {
@@ -141,15 +153,26 @@ const addProjectImage = async (req, res) => {
 
     console.log("project found!");
 
-    if (photo) {
-      project.project_image = photo;
-    }
-    await project.save();
+    const validated = validateRequest(
+      project,
+      req
+    );
+    console.log(validated);
+    if (validated) {
+      if (photo) {
+        project.project_image = photo;
+      }
+      await project.save();
 
-    res.json({
-      message:
-        "Project image updated successfully",
-    });
+      res.json({
+        message:
+          "Project image updated successfully",
+      });
+    } else {
+      res.json({
+        message: "You do not have authorization!",
+      });
+    }
   } catch (error) {
     res
       .status(500)
@@ -174,17 +197,29 @@ const addProjectAlbum = async (req, res) => {
       name: name,
     });
 
-    if (photo) {
-      let album = project.images || [];
-      album.push(...photo);
-      project.images = album;
-    }
-    await project.save();
+    const validated = validateRequest(
+      project,
+      req
+    );
+    console.log(validated);
 
-    res.json({
-      message:
-        "Project album updated successfully",
-    });
+    if (validated) {
+      if (photo) {
+        let album = project.images || [];
+        album.push(...photo);
+        project.images = album;
+      }
+      await project.save();
+
+      res.json({
+        message:
+          "Project album updated successfully",
+      });
+    } else {
+      res.json({
+        message: "You do not have authorization!",
+      });
+    }
   } catch (error) {
     res
       .status(500)
@@ -208,16 +243,28 @@ const addProjectAudios = async (req, res) => {
       name: name,
     });
 
-    if (audio) {
-      let audios = project.project_audios || [];
-      audios.push(...audios);
-      project.project_audios = audios;
-    }
-    await project.save();
+    const validated = validateRequest(
+      project,
+      req
+    );
+    console.log(validated);
 
-    res.json({
-      message: "Audios updated successfully",
-    });
+    if (validated) {
+      if (audio) {
+        let audios = project.project_audios || [];
+        audios.push(...audios);
+        project.project_audios = audios;
+      }
+      await project.save();
+
+      res.json({
+        message: "Audios updated successfully",
+      });
+    } else {
+      res.json({
+        message: "You do not have authorization!",
+      });
+    }
   } catch (error) {
     res
       .status(500)
