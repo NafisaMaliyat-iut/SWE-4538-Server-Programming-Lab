@@ -175,11 +175,8 @@ const addProjectAlbum = async (req, res) => {
     });
 
     if (photo) {
-      let album;
-      if(album!==undefined || album!==null){
-         album = project.images;
+      let album = project.images || [];
       album.push(...photo);
-      }
       project.images = album;
     }
     await project.save();
@@ -212,8 +209,8 @@ const addProjectAudios = async (req, res) => {
     });
 
     if (audio) {
-      let audios = project.project_audios;
-      audios.push(...photo);
+      let audios = project.project_audios || [];
+      audios.push(...audios);
       project.project_audios = audios;
     }
     await project.save();
